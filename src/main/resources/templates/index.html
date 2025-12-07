@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Property Management</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">🏢 Property Management</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="/">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/landlord">Landlords</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/properties">Properties</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/tenants">Tenants</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/bills">Bills & Payments</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="mb-4">📊 Dashboard</h1>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Properties</h5>
+                        <h2 th:text="${propertyCount}">0</h2>
+                        <a href="/properties" class="btn btn-light btn-sm">Manage</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Tenants</h5>
+                        <h2 th:text="${tenantCount}">0</h2>
+                        <a href="/tenants" class="btn btn-light btn-sm">Manage</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Bills</h5>
+                        <h2 th:text="${billCount}">0</h2>
+                        <a href="/bills" class="btn btn-light btn-sm">Manage</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h3>Recent Properties</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Address</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="property : ${properties}">
+                            <td th:text="${property.address}">Address</td>
+                            <td th:text="${property.propertyType}">Type</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h3>Recent Tenants</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Contact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="tenant : ${tenants}">
+                            <td th:text="${tenant.name}">Name</td>
+                            <td th:text="${tenant.contactInfo}">Contact</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
